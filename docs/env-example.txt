@@ -1,0 +1,41 @@
+# App
+APP_NAME=Dashboard Clinica Dr Igor
+DEBUG=False
+
+# Database
+DATABASE_URL=postgresql+asyncpg://user:password@localhost:5432/dashboard_clinica
+REDIS_URL=redis://localhost:6379/0
+
+# Kommo CRM
+KOMMO_DOMAIN=your-domain.kommo.com
+KOMMO_CLIENT_ID=your_client_id
+KOMMO_CLIENT_SECRET=your_client_secret
+KOMMO_ACCESS_TOKEN=your_access_token
+KOMMO_REFRESH_TOKEN=your_refresh_token
+
+# Meta Ads
+META_APP_ID=your_app_id
+META_APP_SECRET=your_app_secret
+META_ACCESS_TOKEN=your_access_token
+META_AD_ACCOUNT_ID=act_123456789
+
+# Google Ads
+GOOGLE_ADS_DEVELOPER_TOKEN=your_developer_token
+GOOGLE_ADS_CLIENT_ID=your_client_id
+GOOGLE_ADS_CLIENT_SECRET=your_client_secret
+GOOGLE_ADS_REFRESH_TOKEN=your_refresh_token
+GOOGLE_ADS_CUSTOMER_ID=123-456-7890
+
+# Instagram
+INSTAGRAM_BUSINESS_ID=your_business_id
+INSTAGRAM_ACCESS_TOKEN=your_access_token
+
+# LLMs
+ANTHROPIC_API_KEY=sk-ant-xxxxx
+GOOGLE_AI_API_KEY=your_google_ai_key
+PERPLEXITY_API_KEY=your_perplexity_key
+
+# Agenda
+AGENDA_API_URL=https://api.agenda.com
+AGENDA_API_KEY=your_agenda_key
+
