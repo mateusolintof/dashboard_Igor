@@ -7,6 +7,7 @@ interface KPICardProps {
   title: string;
   value: number;
   change?: number;
+  changeLabel?: string;
   icon?: React.ReactNode;
   format?: "number" | "currency" | "percent";
   suffix?: string;
@@ -16,6 +17,7 @@ export function KPICard({
   title,
   value,
   change,
+  changeLabel = "vs. mês anterior",
   icon,
   format = "number",
   suffix = "",
@@ -60,7 +62,7 @@ export function KPICard({
               {isPositive ? "+" : ""}
               {change}%
             </span>
-            <span className="text-muted-foreground ml-2">vs. mês anterior</span>
+            <span className="text-muted-foreground ml-2">{changeLabel}</span>
           </div>
         )}
       </CardContent>

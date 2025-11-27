@@ -16,12 +16,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import {
   Sparkles,
-  Send,
   Copy,
   RefreshCw,
   TrendingUp,
   Megaphone,
-  Image,
+  Image as ImageIcon,
   MessageSquare,
 } from "lucide-react";
 
@@ -104,7 +103,7 @@ export default function AgentesPage() {
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 bg-amber-100 rounded-lg">
-                <Image className="w-6 h-6 text-amber-600" />
+                <ImageIcon className="w-6 h-6 text-amber-600" />
               </div>
               <div>
                 <h3 className="font-semibold text-slate-900">

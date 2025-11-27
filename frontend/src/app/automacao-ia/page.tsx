@@ -177,7 +177,7 @@ export default function AutomacaoIAPage() {
                                         {mockObjectivesData.map((entry, index) => (
                                             <Cell key={`cell-${index}`} fill={`var(--chart-${(index % 5) + 1})`} />
                                         ))}
-                                        <LabelList dataKey="value" position="right" fill="var(--foreground)" formatter={(val: any) => `${val}%`} />
+                                        <LabelList dataKey="value" position="right" fill="var(--foreground)" formatter={(val) => `${val}%`} />
                                     </Bar>
                                 </BarChart>
                             </ResponsiveContainer>
