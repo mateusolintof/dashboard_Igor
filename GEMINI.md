@@ -23,7 +23,7 @@ Este arquivo contém instruções e contexto para assistentes de IA (como Claude
 src/
 ├── app/                    # Next.js App Router (páginas)
 ├── components/
-│   ├── ui/                 # Componentes Shadcn/UI (não modificar diretamente)
+│   ├── ui/                 # Componentes Shadcn/UI 
 │   ├── layout/             # Sidebar, Header, DashboardLayout
 │   └── dashboard/          # KPICard, Charts, etc.
 ├── lib/

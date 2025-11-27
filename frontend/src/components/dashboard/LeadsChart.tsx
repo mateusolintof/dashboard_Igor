@@ -23,11 +23,11 @@ interface LeadsChartProps {
 const chartConfig = {
   leads: {
     label: "Novos Leads",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   conversoes: {
     label: "Conversões",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
 } satisfies ChartConfig;
 
@@ -43,7 +43,7 @@ export function LeadsChart({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full">
+        <ChartContainer config={chartConfig} className="h-[300px] w-full min-w-0">
           <LineChart
             accessibilityLayer
             data={data}

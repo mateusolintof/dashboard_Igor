@@ -53,38 +53,38 @@ const mockObjectivesData = [
 const funnelConfig = {
     leads: {
         label: "Leads Totais",
-        color: "hsl(var(--chart-1))",
+        color: "var(--chart-1)",
     },
     atendimento: {
         label: "Atendimento IA",
-        color: "hsl(var(--chart-2))",
+        color: "var(--chart-2)",
     },
     qualificados: {
         label: "Qualificados",
-        color: "hsl(var(--chart-3))",
+        color: "var(--chart-3)",
     },
     agendados: {
         label: "Agendados",
-        color: "hsl(var(--chart-4))",
+        color: "var(--chart-4)",
     },
 } satisfies ChartConfig;
 
 const objectivesConfig = {
     emagrecimento: {
         label: "Emagrecimento",
-        color: "hsl(var(--chart-1))",
+        color: "var(--chart-1)",
     },
     hipertrofia: {
         label: "Hipertrofia",
-        color: "hsl(var(--chart-2))",
+        color: "var(--chart-2)",
     },
     reposicao: {
         label: "Reposição Hormonal",
-        color: "hsl(var(--chart-3))",
+        color: "var(--chart-3)",
     },
     longevidade: {
         label: "Longevidade",
-        color: "hsl(var(--chart-4))",
+        color: "var(--chart-4)",
     },
 } satisfies ChartConfig;
 
@@ -159,7 +159,7 @@ export default function AutomacaoIAPage() {
                         <CardTitle>Funnel de Conversão (IA vs Humano)</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <ChartContainer config={funnelConfig} className="h-[350px] w-full">
+                        <ChartContainer config={funnelConfig} className="h-[350px] w-full min-w-0">
                             <FunnelChart>
                                 <ChartTooltip
                                     cursor={false}
@@ -183,7 +183,7 @@ export default function AutomacaoIAPage() {
                         <CardTitle>Objetivos dos Pacientes</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <ChartContainer config={objectivesConfig} className="h-[350px] w-full">
+                        <ChartContainer config={objectivesConfig} className="h-[350px] w-full min-w-0">
                             <BarChart
                                 accessibilityLayer
                                 data={mockObjectivesData}

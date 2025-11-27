@@ -27,15 +27,15 @@ const chartConfig = {
   },
   "Agendamento IA": {
     label: "Agendamento IA",
-    color: "hsl(var(--chart-1))",
+    color: "var(--chart-1)",
   },
   "Triagem Humana": {
     label: "Triagem Humana",
-    color: "hsl(var(--chart-2))",
+    color: "var(--chart-2)",
   },
   "Consulta Dr. Igor": {
     label: "Consulta Dr. Igor",
-    color: "hsl(var(--chart-3))",
+    color: "var(--chart-3)",
   },
 } satisfies ChartConfig;
 
@@ -51,7 +51,7 @@ export function PipelineChart({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full">
+        <ChartContainer config={chartConfig} className="h-[300px] w-full min-w-0">
           <PieChart>
             <ChartTooltip
               cursor={false}
