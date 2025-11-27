@@ -43,6 +43,8 @@ export function PipelineChart({
   data,
   title = "Distribuição por Pipeline",
 }: PipelineChartProps) {
+  const hasData = data && data.length > 0;
+
   return (
     <Card className="bg-card border-border shadow-sm">
       <CardHeader>
@@ -50,22 +52,31 @@ export function PipelineChart({
           {title}
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full min-w-0">
-          <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Pie
-              data={data}
-              dataKey="value"
-              nameKey="name"
-              innerRadius={60}
-              strokeWidth={5}
-            />
-          </PieChart>
-        </ChartContainer>
+      <CardContent className="pt-0 sm:pt-2">
+        {hasData ? (
+          <ChartContainer
+            config={chartConfig}
+            className="min-h-[240px] sm:h-[280px] lg:h-[320px]"
+          >
+            <PieChart>
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Pie
+                data={data}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={60}
+                strokeWidth={5}
+              />
+            </PieChart>
+          </ChartContainer>
+        ) : (
+          <div className="flex min-h-[200px] items-center justify-center text-sm text-muted-foreground">
+            Sem dados disponíveis para este período.
+          </div>
+        )}
       </CardContent>
     </Card>
   );

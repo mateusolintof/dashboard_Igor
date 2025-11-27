@@ -83,17 +83,17 @@ export default function InstagramPage() {
       {/* Profile Summary */}
       <Card>
         <CardContent className="p-6">
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6">
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-2xl font-bold">
               DI
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <h2 className="text-xl font-bold text-slate-900">
                 @clinica.drigor
               </h2>
               <p className="text-slate-500">Clínica Dr. Igor - Estética Avançada</p>
             </div>
-            <div className="flex gap-8 text-center">
+            <div className="flex gap-6 sm:gap-8 text-center flex-wrap">
               <div>
                 <p className="text-2xl font-bold text-slate-900">15.8K</p>
                 <p className="text-sm text-slate-500">Seguidores</p>
@@ -112,7 +112,7 @@ export default function InstagramPage() {
       </Card>
 
       {/* KPIs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 sm:gap-4">
         <KPICard
           title="Seguidores"
           value={15800}
@@ -253,4 +253,3 @@ export default function InstagramPage() {
     </div>
   );
 }
-

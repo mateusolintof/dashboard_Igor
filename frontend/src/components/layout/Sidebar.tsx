@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -28,14 +29,22 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { sidebarOpen, toggleSidebar } = useDashboardStore();
+  const { sidebarOpen, toggleSidebar, setSidebarOpen } = useDashboardStore();
+
+  useEffect(() => {
+    // Close sidebar on mobile by default; keep open on large screens
+    const isDesktop = typeof window !== "undefined" && window.innerWidth >= 1024;
+    setSidebarOpen(isDesktop);
+  }, [setSidebarOpen]);
 
   return (
     <aside
       className={cn(
-        "min-h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300 flex flex-col",
-        sidebarOpen ? "w-64" : "w-20"
+        "fixed inset-y-0 left-0 z-40 bg-sidebar border-r border-sidebar-border transition-all duration-300 flex flex-col w-64 lg:static lg:min-h-screen",
+        sidebarOpen ? "translate-x-0 lg:w-64" : "-translate-x-full lg:translate-x-0 lg:w-20"
       )}
+      aria-label="Navegação lateral"
+      aria-expanded={sidebarOpen}
     >
       {/* Header */}
       <div className="p-6 flex items-center justify-between">
@@ -48,6 +57,7 @@ export function Sidebar() {
           size="icon"
           onClick={toggleSidebar}
           className="text-slate-400 hover:text-white hover:bg-slate-700"
+          aria-label={sidebarOpen ? "Recolher menu lateral" : "Expandir menu lateral"}
         >
           {sidebarOpen ? (
             <ChevronLeft className="w-5 h-5" />
@@ -93,4 +103,3 @@ export function Sidebar() {
     </aside>
   );
 }
-

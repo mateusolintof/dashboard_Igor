@@ -46,8 +46,7 @@ export const useDashboardStore = create<DashboardState>((set) => ({
   setIsLoading: (loading) => set({ isLoading: loading }),
 
   // Sidebar
-  sidebarOpen: true,
+  sidebarOpen: false,
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 }));
-

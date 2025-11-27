@@ -101,7 +101,7 @@ export default function AutomacaoIAPage() {
             </div>
 
             {/* KPIs Row 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 sm:gap-6">
                 <KPICard
                     title="Leads Totais"
                     value={1247}
@@ -129,7 +129,7 @@ export default function AutomacaoIAPage() {
             </div>
 
             {/* KPIs Row 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 sm:gap-6">
                 <KPICard
                     title="Conversas Ativas"
                     value={85}
@@ -153,13 +153,16 @@ export default function AutomacaoIAPage() {
             </div>
 
             {/* Charts */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 min-w-0">
                 <Card className="bg-card border-border shadow-sm">
                     <CardHeader>
                         <CardTitle>Funnel de Conversão (IA vs Humano)</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <ChartContainer config={funnelConfig} className="h-[350px] w-full min-w-0">
+                        <ChartContainer
+                            config={funnelConfig}
+                            className="min-h-[260px] sm:h-[320px] lg:h-[360px]"
+                        >
                             <FunnelChart>
                                 <ChartTooltip
                                     cursor={false}
@@ -183,7 +186,10 @@ export default function AutomacaoIAPage() {
                         <CardTitle>Objetivos dos Pacientes</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <ChartContainer config={objectivesConfig} className="h-[350px] w-full min-w-0">
+                        <ChartContainer
+                            config={objectivesConfig}
+                            className="min-h-[260px] sm:h-[320px] lg:h-[360px]"
+                        >
                             <BarChart
                                 accessibilityLayer
                                 data={mockObjectivesData}

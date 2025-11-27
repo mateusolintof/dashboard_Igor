@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 import { KPICard } from "@/components/dashboard/KPICard";
 import { CampaignChart } from "@/components/dashboard/CampaignChart";
 import {
@@ -83,6 +85,23 @@ const mockChartData = [
 ];
 
 export default function TrafegoPagoPage() {
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 350);
+    return () => clearTimeout(t);
+  }, []);
+
+  const paginatedCampaigns = useMemo(
+    () =>
+      mockCampaigns.slice((page - 1) * pageSize, page * pageSize),
+    [page]
+  );
+
+  const totalPages = Math.max(1, Math.ceil(mockCampaigns.length / pageSize));
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -100,7 +119,7 @@ export default function TrafegoPagoPage() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 sm:gap-4">
         <KPICard
           title="Investimento Total"
           value={14700}
@@ -155,70 +174,111 @@ export default function TrafegoPagoPage() {
             <CardHeader>
               <CardTitle>Campanhas Ativas</CardTitle>
             </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Campanha</TableHead>
-                    <TableHead>Plataforma</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Investimento</TableHead>
-                    <TableHead className="text-right">Impressões</TableHead>
-                    <TableHead className="text-right">Cliques</TableHead>
-                    <TableHead className="text-right">CTR</TableHead>
-                    <TableHead className="text-right">Conversões</TableHead>
-                    <TableHead className="text-right">CPL</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {mockCampaigns.map((campaign) => (
-                    <TableRow key={campaign.id}>
-                      <TableCell className="font-medium">
-                        {campaign.nome}
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline">{campaign.plataforma}</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={
-                            campaign.status === "Ativa" ? "default" : "secondary"
-                          }
-                        >
-                          {campaign.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {new Intl.NumberFormat("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        }).format(campaign.investimento)}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {new Intl.NumberFormat("pt-BR").format(
-                          campaign.impressoes
-                        )}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {new Intl.NumberFormat("pt-BR").format(campaign.cliques)}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {campaign.ctr.toFixed(2)}%
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {campaign.conversoes}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {new Intl.NumberFormat("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        }).format(campaign.cpl)}
-                      </TableCell>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <Table className="min-w-[860px]">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Campanha</TableHead>
+                      <TableHead>Plataforma</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead className="text-right">Investimento</TableHead>
+                      <TableHead className="text-right">Impressões</TableHead>
+                      <TableHead className="text-right">Cliques</TableHead>
+                      <TableHead className="text-right">CTR</TableHead>
+                      <TableHead className="text-right">Conversões</TableHead>
+                      <TableHead className="text-right">CPL</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {loading
+                      ? Array.from({ length: pageSize }).map((_, idx) => (
+                        <TableRow key={idx}>
+                          <TableCell colSpan={9}>
+                            <Skeleton className="h-5 w-full" />
+                          </TableCell>
+                        </TableRow>
+                      ))
+                      : paginatedCampaigns.length === 0 ? (
+                        <TableRow>
+                          <TableCell colSpan={9} className="text-center text-slate-500">
+                            Nenhuma campanha encontrada para o filtro atual.
+                          </TableCell>
+                        </TableRow>
+                      ) : (
+                        paginatedCampaigns.map((campaign) => (
+                          <TableRow key={campaign.id}>
+                            <TableCell className="font-medium">
+                              {campaign.nome}
+                            </TableCell>
+                            <TableCell>
+                              <Badge variant="outline">{campaign.plataforma}</Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Badge
+                                variant={
+                                  campaign.status === "Ativa" ? "default" : "secondary"
+                                }
+                              >
+                                {campaign.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              {new Intl.NumberFormat("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              }).format(campaign.investimento)}
+                            </TableCell>
+                            <TableCell className="text-right">
+                              {new Intl.NumberFormat("pt-BR").format(
+                                campaign.impressoes
+                              )}
+                            </TableCell>
+                            <TableCell className="text-right">
+                              {new Intl.NumberFormat("pt-BR").format(campaign.cliques)}
+                            </TableCell>
+                            <TableCell className="text-right">
+                              {campaign.ctr.toFixed(2)}%
+                            </TableCell>
+                            <TableCell className="text-right">
+                              {campaign.conversoes}
+                            </TableCell>
+                            <TableCell className="text-right">
+                              {new Intl.NumberFormat("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              }).format(campaign.cpl)}
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
+            <div className="flex items-center justify-between px-4 py-3 text-sm text-muted-foreground">
+              <span>
+                Página {page} de {totalPages}
+              </span>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                >
+                  Anterior
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                >
+                  Próxima
+                </Button>
+              </div>
+            </div>
           </Card>
         </TabsContent>
 
@@ -245,4 +305,3 @@ export default function TrafegoPagoPage() {
     </div>
   );
 }
-

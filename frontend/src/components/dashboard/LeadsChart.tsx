@@ -35,6 +35,8 @@ export function LeadsChart({
   data,
   title = "Evolução de Leads",
 }: LeadsChartProps) {
+  const hasData = data && data.length > 0;
+
   return (
     <Card className="bg-card border-border shadow-sm">
       <CardHeader>
@@ -42,45 +44,53 @@ export function LeadsChart({
           {title}
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full min-w-0">
-          <LineChart
-            accessibilityLayer
-            data={data}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
+      <CardContent className="pt-0 sm:pt-2">
+        {hasData ? (
+          <ChartContainer
+            config={chartConfig}
+            className="min-h-[240px] sm:h-[280px] lg:h-[320px]"
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="date"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent />}
-            />
-            <Line
-              dataKey="leads"
-              type="monotone"
-              stroke="var(--color-leads)"
-              strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              dataKey="conversoes"
-              type="monotone"
-              stroke="var(--color-conversoes)"
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        </ChartContainer>
+            <LineChart
+              accessibilityLayer
+              data={data}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="date"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+              />
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent />}
+              />
+              <Line
+                dataKey="leads"
+                type="monotone"
+                stroke="var(--color-leads)"
+                strokeWidth={2}
+                dot={false}
+              />
+              <Line
+                dataKey="conversoes"
+                type="monotone"
+                stroke="var(--color-conversoes)"
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          </ChartContainer>
+        ) : (
+          <div className="flex min-h-[200px] items-center justify-center text-sm text-muted-foreground">
+            Sem dados disponíveis para este período.
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 }
-

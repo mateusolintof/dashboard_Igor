@@ -59,7 +59,7 @@ export default function AgentesPage() {
       </div>
 
       {/* Agent Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4">
         <Card className="border-2 border-blue-200 bg-blue-50/50">
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-3">
@@ -177,29 +177,7 @@ export default function AgentesPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium text-slate-700">
-                      Tom de Voz
-                    </label>
-                    <Select
-                      value={copyPrompt.tomVoz}
-                      onValueChange={(value) =>
-                        setCopyPrompt({ ...copyPrompt, tomVoz: value })
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="profissional">Profissional</SelectItem>
-                        <SelectItem value="amigavel">Amigável</SelectItem>
-                        <SelectItem value="urgente">Urgente</SelectItem>
-                        <SelectItem value="inspirador">Inspirador</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium text-slate-700">
                       Plataforma
@@ -222,6 +200,28 @@ export default function AgentesPage() {
                         <SelectItem value="google_display">
                           Google Display
                         </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-slate-700">
+                      Tom de Voz
+                    </label>
+                    <Select
+                      value={copyPrompt.tomVoz}
+                      onValueChange={(value) =>
+                        setCopyPrompt({ ...copyPrompt, tomVoz: value })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="profissional">Profissional</SelectItem>
+                        <SelectItem value="amigavel">Amigável</SelectItem>
+                        <SelectItem value="urgente">Urgente</SelectItem>
+                        <SelectItem value="inspirador">Inspirador</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -321,4 +321,3 @@ export default function AgentesPage() {
     </div>
   );
 }
-
