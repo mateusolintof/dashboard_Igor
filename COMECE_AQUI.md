@@ -9,7 +9,7 @@
 ```bash
 # 1. Clone o projeto (se ainda não fez)
 git clone https://github.com/mateusolintof/dashboard_Igor.git
-cd dashboard-clinica
+cd dashboard-igor
 
 # 2. Configure o backend
 cd backend && ./setup.sh
