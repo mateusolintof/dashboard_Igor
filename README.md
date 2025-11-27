@@ -10,6 +10,7 @@
 
 **Dashboard analítico completo com integração de IA para gestão de clínica médica**
 
+**🎯 [COMECE AQUI](./COMECE_AQUI.md)** •
 [Documentação](#-documentação) •
 [Instalação](#-instalação) •
 [Funcionalidades](#-funcionalidades) •
@@ -112,32 +113,83 @@ dashboard-clinica/
 
 ## 🛠️ Instalação
 
-### Pré-requisitos
+### 📚 Documentação Completa
 
-- Node.js 18+
-- Python 3.12+
-- Docker e Docker Compose
-- PostgreSQL 16+ (ou usar via Docker)
-- Redis 7+ (ou usar via Docker)
+**Novo na equipe?** Temos guias detalhados para você:
 
-### 1. Clone o repositório
+| Guia | Descrição | Tempo |
+|------|-----------|-------|
+| **[GUIA_NAVEGACAO.md](./GUIA_NAVEGACAO.md)** | 🗺️ Índice completo da documentação | - |
+| **[backend/INICIO_RAPIDO.md](./backend/INICIO_RAPIDO.md)** | ⚡ Setup em 5 minutos | 5 min |
+| **[backend/CHECKLIST_SETUP.md](./backend/CHECKLIST_SETUP.md)** | ✅ Checklist passo a passo | 15 min |
+| **[backend/GUIA_CONFIGURACAO_BACKEND.md](./backend/GUIA_CONFIGURACAO_BACKEND.md)** | 📖 Guia completo e detalhado | 30 min |
+| **[backend/COMANDOS_UTEIS.md](./backend/COMANDOS_UTEIS.md)** | 📝 Referência de comandos | - |
+| **[backend/TROUBLESHOOTING.md](./backend/TROUBLESHOOTING.md)** | 🔧 Solução de problemas | - |
+
+### 🚀 Início Rápido
+
+#### Opção 1: Setup Automático (Recomendado)
 
 ```bash
+# 1. Clone o repositório
 git clone https://github.com/mateusolintof/dashboard_Igor.git
 cd dashboard-clinica
+
+# 2. Configure o backend automaticamente
+cd backend
+./setup.sh
+
+# 3. Inicie o servidor
+source venv/bin/activate
+uvicorn app.main:app --reload
 ```
 
-### 2. Configure as variáveis de ambiente
+✅ Backend rodando em: http://localhost:8000/docs
+
+#### Opção 2: Docker (Mais Rápido)
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/mateusolintof/dashboard_Igor.git
+cd dashboard-clinica
+
+# 2. Configure variáveis
+cp docs/env-example.txt .env
+nano .env  # Edite com suas credenciais
+
+# 3. Inicie tudo
+docker-compose up -d
+docker-compose exec backend alembic upgrade head
+```
+
+✅ Serviços rodando:
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8000
+- PostgreSQL: localhost:5432
+- Redis: localhost:6379
+
+### 📋 Pré-requisitos
+
+- **Node.js 18+** ([Download](https://nodejs.org/))
+- **Python 3.11+** ([Download](https://www.python.org/downloads/))
+- **Docker Desktop** ([Download](https://www.docker.com/products/docker-desktop)) - Opcional
+- **PostgreSQL 16+** ([Download](https://www.postgresql.org/download/)) - Ou usar Docker
+- **Redis 7+** ([Download](https://redis.io/download)) - Ou usar Docker
+
+### 🔐 Variáveis de Ambiente
+
+Crie um arquivo `.env` com base no exemplo:
 
 ```bash
 cp docs/env-example.txt .env
 ```
 
-Edite o arquivo `.env` com suas credenciais:
+**Variáveis obrigatórias:**
 
 ```env
 # Database
-DATABASE_URL=postgresql+asyncpg://user:password@localhost:5432/dashboard_clinica
+DATABASE_URL=postgresql+asyncpg://dashboard:dashboard_password@localhost:5432/dashboard_clinica
+REDIS_URL=redis://localhost:6379/0
 
 # Kommo CRM
 KOMMO_DOMAIN=seu-dominio.kommo.com
@@ -151,44 +203,12 @@ META_AD_ACCOUNT_ID=act_123456789
 INSTAGRAM_BUSINESS_ID=seu_business_id
 INSTAGRAM_ACCESS_TOKEN=seu_token
 
-# LLMs
+# IA
 ANTHROPIC_API_KEY=sk-ant-xxxxx
-GOOGLE_AI_API_KEY=seu_google_ai_key
+GOOGLE_AI_API_KEY=AIzaSyxxxxx
 ```
 
-### 3. Setup com Docker (Recomendado)
-
-```bash
-docker-compose up -d
-```
-
-Isso irá iniciar:
-- Frontend: http://localhost:3000
-- Backend: http://localhost:8000
-- PostgreSQL: localhost:5432
-- Redis: localhost:6379
-
-### 4. Setup Manual (Desenvolvimento)
-
-#### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-#### Backend
-
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou: venv\Scripts\activate  # Windows
-
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
+📖 **Guia completo de configuração:** [backend/GUIA_CONFIGURACAO_BACKEND.md](./backend/GUIA_CONFIGURACAO_BACKEND.md)
 
 ---
 

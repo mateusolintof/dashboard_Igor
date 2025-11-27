@@ -1,6 +1,21 @@
-# Dashboard Clínica Dr. Igor
+# 📚 Documentação - Dashboard Clínica Dr. Igor
 
 Dashboard analítico completo com integração de IA para gestão de clínica médica.
+
+---
+
+## 🗺️ Navegação Rápida
+
+**Novo no projeto?** Acesse nossos guias completos:
+
+| Documento | Descrição |
+|-----------|-----------|
+| **[SUMARIO_DOCUMENTACAO.md](../SUMARIO_DOCUMENTACAO.md)** | 📋 Sumário completo da documentação |
+| **[GUIA_NAVEGACAO.md](../GUIA_NAVEGACAO.md)** | 🗺️ Índice geral do projeto |
+| **[backend/INICIO_RAPIDO.md](../backend/INICIO_RAPIDO.md)** | ⚡ Setup do backend em 5 minutos |
+| **[backend/INDICE.md](../backend/INDICE.md)** | 📚 Índice da documentação do backend |
+
+---
 
 ## 🚀 Tecnologias
 
