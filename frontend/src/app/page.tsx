@@ -18,16 +18,16 @@ const mockLeadsData = [
 ];
 
 const mockCampaignData = [
-  { nome: "Botox", investimento: 5000, conversoes: 45, cpl: 111 },
-  { nome: "Preenchimento", investimento: 3500, conversoes: 32, cpl: 109 },
-  { nome: "Harmonização", investimento: 4200, conversoes: 38, cpl: 110 },
-  { nome: "Institucional", investimento: 2000, conversoes: 15, cpl: 133 },
+  { nome: "Emagrecimento", investimento: 5000, conversoes: 45, cpl: 111 },
+  { nome: "Performance", investimento: 3500, conversoes: 32, cpl: 109 },
+  { nome: "Implantes", investimento: 4200, conversoes: 38, cpl: 110 },
+  { nome: "Longevidade", investimento: 2000, conversoes: 15, cpl: 133 },
 ];
 
 const mockPipelineData = [
-  { name: "Atendimento IA", value: 120, color: "#3b82f6" },
-  { name: "Atendimento Humano", value: 85, color: "#10b981" },
-  { name: "Dr. Igor", value: 45, color: "#f59e0b" },
+  { name: "Agendamento IA", value: 120, color: "var(--chart-1)" },
+  { name: "Triagem Humana", value: 85, color: "var(--chart-2)" },
+  { name: "Consulta Dr. Igor", value: 45, color: "var(--chart-3)" },
 ];
 
 export default function DashboardPage() {
@@ -82,7 +82,7 @@ export default function DashboardPage() {
       {/* Charts Row 2 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <PipelineChart data={mockPipelineData} />
-        
+
         {/* Quick Stats Card */}
         <div className="lg:col-span-2 bg-white rounded-lg border border-slate-200 p-6">
           <h3 className="text-lg font-semibold text-slate-900 mb-4">

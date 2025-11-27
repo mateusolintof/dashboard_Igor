@@ -2,80 +2,68 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 interface KPICardProps {
   title: string;
-  value: string | number;
+  value: number;
   change?: number;
-  changeLabel?: string;
   icon?: React.ReactNode;
   format?: "number" | "currency" | "percent";
+  suffix?: string;
 }
 
 export function KPICard({
   title,
   value,
   change,
-  changeLabel = "vs período anterior",
   icon,
   format = "number",
+  suffix = "",
 }: KPICardProps) {
-  const formatValue = (val: string | number) => {
-    if (typeof val === "string") return val;
+  const formattedValue =
+    format === "currency"
+      ? new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(value as number)
+      : format === "percent"
+        ? `${value}%`
+        : (value as number).toLocaleString("pt-BR");
 
-    switch (format) {
-      case "currency":
-        return new Intl.NumberFormat("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        }).format(val);
-      case "percent":
-        return `${val.toFixed(1)}%`;
-      default:
-        return new Intl.NumberFormat("pt-BR").format(val);
-    }
-  };
-
-  const getTrendIcon = () => {
-    if (!change) return <Minus className="w-4 h-4 text-slate-400" />;
-    if (change > 0) return <TrendingUp className="w-4 h-4 text-emerald-500" />;
-    return <TrendingDown className="w-4 h-4 text-red-500" />;
-  };
+  const isPositive = change !== undefined && change >= 0;
 
   return (
-    <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
+    <Card className="bg-card border-border shadow-sm hover:shadow-md transition-all duration-300">
       <CardContent className="p-6">
-        <div className="flex items-start justify-between">
+        <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-slate-500">{title}</p>
-            <p className="text-3xl font-bold text-slate-900 mt-2">
-              {formatValue(value)}
-            </p>
-            {change !== undefined && (
-              <div className="flex items-center gap-1 mt-2">
-                {getTrendIcon()}
-                <span
-                  className={cn(
-                    "text-sm font-medium",
-                    change > 0
-                      ? "text-emerald-600"
-                      : change < 0
-                      ? "text-red-600"
-                      : "text-slate-500"
-                  )}
-                >
-                  {change > 0 ? "+" : ""}
-                  {change?.toFixed(1)}%
-                </span>
-                <span className="text-xs text-slate-400">{changeLabel}</span>
-              </div>
-            )}
+            <p className="text-sm font-medium text-muted-foreground">{title}</p>
+            <h3 className="text-2xl font-bold text-foreground mt-2">
+              {formattedValue}
+              {suffix}
+            </h3>
           </div>
-          {icon && <div className="p-3 bg-blue-50 rounded-lg">{icon}</div>}
+          <div className="p-3 bg-primary/10 rounded-xl ring-1 ring-primary/20">
+            {icon}
+          </div>
         </div>
+        {change !== undefined && (
+          <div className="mt-4 flex items-center text-sm">
+            <span
+              className={cn(
+                "font-medium px-2 py-0.5 rounded-full text-xs",
+                isPositive
+                  ? "text-emerald-600 bg-emerald-500/10"
+                  : "text-red-600 bg-red-500/10"
+              )}
+            >
+              {isPositive ? "+" : ""}
+              {change}%
+            </span>
+            <span className="text-muted-foreground ml-2">vs. mês anterior</span>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 }
-

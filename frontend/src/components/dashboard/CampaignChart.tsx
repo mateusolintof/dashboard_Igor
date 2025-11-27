@@ -29,32 +29,42 @@ export function CampaignChart({
   title = "Performance de Campanhas",
 }: CampaignChartProps) {
   return (
-    <Card className="bg-white border-slate-200">
+    <Card className="bg-card border-border shadow-sm">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold text-slate-900">
+        <CardTitle className="text-lg font-semibold text-foreground">
           {title}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px]">
+        <div className="h-[300px] w-full min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
               <XAxis
                 dataKey="nome"
-                stroke="#64748b"
+                stroke="var(--muted-foreground)"
                 fontSize={12}
                 tickLine={false}
+                axisLine={false}
+                dy={10}
               />
-              <YAxis stroke="#64748b" fontSize={12} tickLine={false} />
+              <YAxis
+                stroke="var(--muted-foreground)"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                dx={-10}
+              />
               <Tooltip
+                cursor={{ fill: "var(--muted)" }}
                 contentStyle={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #e2e8f0",
-                  borderRadius: "8px",
+                  backgroundColor: "var(--card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
+                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                 }}
                 formatter={(value: number, name: string) => {
                   if (name === "Investimento" || name === "CPL") {
@@ -66,16 +76,16 @@ export function CampaignChart({
                   return value;
                 }}
               />
-              <Legend />
+              <Legend wrapperStyle={{ paddingTop: "20px" }} />
               <Bar
                 dataKey="investimento"
-                fill="#3b82f6"
+                fill="var(--chart-1)"
                 name="Investimento"
                 radius={[4, 4, 0, 0]}
               />
               <Bar
                 dataKey="conversoes"
-                fill="#10b981"
+                fill="var(--chart-2)"
                 name="Conversões"
                 radius={[4, 4, 0, 0]}
               />

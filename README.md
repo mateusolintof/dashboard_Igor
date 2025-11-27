@@ -21,13 +21,12 @@
 
 ## 📋 Sobre o Projeto
 
-Sistema de dashboard analítico desenvolvido para a **Clínica Dr. Igor**, oferecendo:
+Sistema de dashboard analítico desenvolvido para a **Clínica Dr. Igor (Nutrologia)**, oferecendo:
 
 - 📊 **Visualização de KPIs** em tempo real
 - 👥 **Gestão de Leads** integrada com Kommo CRM
 - 📈 **Analytics de Campanhas** Meta Ads e Google Ads
-- 📱 **Métricas do Instagram** Business
-- 🤖 **Agentes de IA** para análise e geração de conteúdo
+- 🤖 **Automação IA**: Funil de conversão, triagem automática e análise de objetivos dos pacientes
 
 ---
 
@@ -251,7 +250,8 @@ POST /api/agents/generate-copy      # Geração de copies
 - Dados demográficos da audiência
 - Taxa de engajamento
 
-### 🤖 Agentes de IA
+### 🤖 Agentes de IA & Automação
+- **Dashboard Dedicado**: Métricas exclusivas de automação e conversas
 - **Analista de Campanhas**: Análise detalhada com insights acionáveis
 - **Copywriter**: Geração de copies otimizadas por plataforma
 - **Comparador**: Análise comparativa entre campanhas

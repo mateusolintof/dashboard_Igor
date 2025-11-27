@@ -28,49 +28,60 @@ export function LeadsChart({
   title = "Evolução de Leads",
 }: LeadsChartProps) {
   return (
-    <Card className="bg-white border-slate-200">
+    <Card className="bg-card border-border shadow-sm">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold text-slate-900">
+        <CardTitle className="text-lg font-semibold text-foreground">
           {title}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px]">
+        <div className="h-[300px] w-full min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={data}
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
               <XAxis
                 dataKey="date"
-                stroke="#64748b"
+                stroke="var(--muted-foreground)"
                 fontSize={12}
                 tickLine={false}
+                axisLine={false}
+                dy={10}
               />
-              <YAxis stroke="#64748b" fontSize={12} tickLine={false} />
+              <YAxis
+                stroke="var(--muted-foreground)"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                dx={-10}
+              />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #e2e8f0",
-                  borderRadius: "8px",
+                  backgroundColor: "var(--card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
+                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                 }}
               />
-              <Legend />
+              <Legend wrapperStyle={{ paddingTop: "20px" }} />
               <Line
                 type="monotone"
                 dataKey="leads"
-                stroke="#3b82f6"
-                strokeWidth={2}
-                dot={{ fill: "#3b82f6", strokeWidth: 2, r: 4 }}
+                stroke="var(--chart-1)"
+                strokeWidth={3}
+                dot={{ fill: "var(--chart-1)", strokeWidth: 2, r: 4, stroke: "var(--background)" }}
+                activeDot={{ r: 6, strokeWidth: 0 }}
                 name="Novos Leads"
               />
               <Line
                 type="monotone"
                 dataKey="conversoes"
-                stroke="#10b981"
-                strokeWidth={2}
-                dot={{ fill: "#10b981", strokeWidth: 2, r: 4 }}
+                stroke="var(--chart-2)"
+                strokeWidth={3}
+                dot={{ fill: "var(--chart-2)", strokeWidth: 2, r: 4, stroke: "var(--background)" }}
+                activeDot={{ r: 6, strokeWidth: 0 }}
                 name="Conversões"
               />
             </LineChart>

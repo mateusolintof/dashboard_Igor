@@ -18,7 +18,8 @@ import { Button } from "@/components/ui/button";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Leads", href: "/leads", icon: Users },
+  { name: "Automação IA", href: "/automacao-ia", icon: Sparkles },
+  { name: "Leads Gerais", href: "/leads", icon: Users },
   { name: "Tráfego Pago", href: "/trafego-pago", icon: Megaphone },
   { name: "Instagram", href: "/instagram", icon: Instagram },
   { name: "Agentes IA", href: "/agentes", icon: Sparkles },
@@ -32,7 +33,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 transition-all duration-300",
+        "min-h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300 flex flex-col",
         sidebarOpen ? "w-64" : "w-20"
       )}
     >
@@ -57,7 +58,7 @@ export function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="px-3 space-y-1">
+      <nav className="px-3 space-y-1 flex-1">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -67,8 +68,8 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all",
                 isActive
-                  ? "bg-blue-600 text-white"
-                  : "text-slate-300 hover:bg-slate-700/50 hover:text-white"
+                  ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm"
+                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               )}
             >
               <item.icon className="w-5 h-5 flex-shrink-0" />
@@ -83,15 +84,10 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div
-        className={cn(
-          "absolute bottom-6 left-0 right-0 px-6",
-          !sidebarOpen && "hidden"
-        )}
-      >
-        <div className="p-4 bg-slate-800/50 rounded-lg">
-          <p className="text-xs text-slate-400">Versão 1.0.0</p>
-          <p className="text-xs text-slate-500">© 2024 Convert Digital</p>
+      <div className={cn("p-6 mt-auto", !sidebarOpen && "hidden")}>
+        <div className="p-4 bg-sidebar-accent/50 rounded-lg border border-sidebar-border">
+          <p className="text-xs text-sidebar-foreground/60">Versão 1.0.0</p>
+          <p className="text-xs text-sidebar-foreground/40">© 2025 Convert Digital</p>
         </div>
       </div>
     </aside>
