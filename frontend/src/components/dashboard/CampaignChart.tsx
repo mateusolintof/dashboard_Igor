@@ -2,15 +2,12 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 interface CampaignData {
   nome: string;
@@ -24,6 +21,17 @@ interface CampaignChartProps {
   title?: string;
 }
 
+const chartConfig = {
+  investimento: {
+    label: "Investimento",
+    color: "hsl(var(--chart-1))",
+  },
+  conversoes: {
+    label: "Conversões",
+    color: "hsl(var(--chart-2))",
+  },
+} satisfies ChartConfig;
+
 export function CampaignChart({
   data,
   title = "Performance de Campanhas",
@@ -36,62 +44,23 @@ export function CampaignChart({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px] w-full min-w-0">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={data}
-              margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
-              <XAxis
-                dataKey="nome"
-                stroke="var(--muted-foreground)"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                dy={10}
-              />
-              <YAxis
-                stroke="var(--muted-foreground)"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                dx={-10}
-              />
-              <Tooltip
-                cursor={{ fill: "var(--muted)" }}
-                contentStyle={{
-                  backgroundColor: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius)",
-                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
-                }}
-                formatter={(value: number, name: string) => {
-                  if (name === "Investimento" || name === "CPL") {
-                    return new Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(value);
-                  }
-                  return value;
-                }}
-              />
-              <Legend wrapperStyle={{ paddingTop: "20px" }} />
-              <Bar
-                dataKey="investimento"
-                fill="var(--chart-1)"
-                name="Investimento"
-                radius={[4, 4, 0, 0]}
-              />
-              <Bar
-                dataKey="conversoes"
-                fill="var(--chart-2)"
-                name="Conversões"
-                radius={[4, 4, 0, 0]}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartContainer config={chartConfig} className="h-[300px] w-full">
+          <BarChart accessibilityLayer data={data}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="nome"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="dashed" />}
+            />
+            <Bar dataKey="investimento" fill="var(--color-investimento)" radius={4} />
+            <Bar dataKey="conversoes" fill="var(--color-conversoes)" radius={4} />
+          </BarChart>
+        </ChartContainer>
       </CardContent>
     </Card>
   );

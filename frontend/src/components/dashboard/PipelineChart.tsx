@@ -2,13 +2,12 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { Pie, PieChart } from "recharts";
 
 interface PipelineData {
   name: string;
@@ -22,14 +21,23 @@ interface PipelineChartProps {
   title?: string;
 }
 
-// Define a set of colors for the pie chart segments
-const COLORS = [
-  "var(--chart-1)",
-  "var(--chart-2)",
-  "var(--chart-3)",
-  "var(--chart-4)",
-  "var(--chart-5)",
-];
+const chartConfig = {
+  value: {
+    label: "Leads",
+  },
+  "Agendamento IA": {
+    label: "Agendamento IA",
+    color: "hsl(var(--chart-1))",
+  },
+  "Triagem Humana": {
+    label: "Triagem Humana",
+    color: "hsl(var(--chart-2))",
+  },
+  "Consulta Dr. Igor": {
+    label: "Consulta Dr. Igor",
+    color: "hsl(var(--chart-3))",
+  },
+} satisfies ChartConfig;
 
 export function PipelineChart({
   data,
@@ -43,43 +51,21 @@ export function PipelineChart({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px] w-full min-w-0">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={data}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={80}
-                paddingAngle={5}
-                dataKey="value"
-              >
-                {data.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                    stroke="var(--card)"
-                    strokeWidth={2}
-                  />
-                ))}
-              </Pie>
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius)",
-                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
-                }}
-              />
-              <Legend
-                verticalAlign="bottom"
-                height={36}
-                iconType="circle"
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartContainer config={chartConfig} className="h-[300px] w-full">
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              innerRadius={60}
+              strokeWidth={5}
+            />
+          </PieChart>
+        </ChartContainer>
       </CardContent>
     </Card>
   );

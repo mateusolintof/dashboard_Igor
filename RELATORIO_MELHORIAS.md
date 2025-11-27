@@ -19,7 +19,8 @@ Revisão completa do frontend para elevar o nível visual (de "amador" para "pre
     - **Funil de Conversão**: Visualização clara da performance da IA vs Humano em cada etapa.
     - **Objetivos dos Pacientes**: Gráfico de barras mostrando a distribuição dos interesses (Emagrecimento, Hipertrofia, etc.).
 
-### 3. Design System Premium
+### 3. Design System Premium & Tecnológico
+- **Shadcn Charts**: Migração completa de todos os gráficos para usar os componentes nativos do Shadcn/UI, garantindo um visual moderno, interativo e consistente com o resto da interface.
 - **Nova Paleta de Cores**: Tema "Technological" com tons de azul profundo, slate e acentos vibrantes.
 - **Componentes Modernizados**: Sidebar limpa, Cards de KPI com hierarquia visual e gráficos responsivos.
 
