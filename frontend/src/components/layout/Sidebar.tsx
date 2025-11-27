@@ -23,7 +23,6 @@ const navigation = [
   { name: "Leads Gerais", href: "/leads", icon: Users },
   { name: "Tráfego Pago", href: "/trafego-pago", icon: Megaphone },
   { name: "Instagram", href: "/instagram", icon: Instagram },
-  { name: "Agentes IA", href: "/agentes", icon: Sparkles },
   { name: "Configurações", href: "/configuracoes", icon: Settings },
 ];
 
